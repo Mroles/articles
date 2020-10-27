@@ -1,0 +1,161 @@
+<!--
+<!DOCTYPE html>
+
+<head>
+  <title>
+    Create New Article
+  </title>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+  <img id="image" height="200px" width="200px">
+  <div class="card">
+    <div class="card-body">
+      <h2 class="title">Add Article</h2>
+      <form method="POST" action="/articles/add">
+        <div class="form-group">
+          <label>Title</label>
+          <input name="title" required>
+        </div>
+        <div class="form-group">
+          <label>Content</label>
+          <textarea required name="content" placeholder="Enter Content Here..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <input required type="file" name="file" id="photo" onchange="uploadImage()">
+
+          <span id="hide" hidden>Loading</span>
+
+
+        </div>
+
+        
+
+        <div class="form-group">
+          <label>Excerpt</label>
+          <textarea required name="excerpt" placeholder="Enter an excerpt here..."></textarea>
+        </div>
+        <input type="submit">
+      </form>
+    </div>
+  </div>
+</body>
+-->
+
+<!DOCTYPE html>
+<head>    
+     <title>Add Article</title>   
+</head>
+
+<body>
+<section class="section single-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                <div class="page-wrapper">
+                    <div class="custombox clearfix">
+                        <h4 class="small-title">New Article</h4>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <form class="form-wrapper" action="/articles/add" method="POST">
+                                  <div class="form-group">
+                                    <input id="urltosend" name="url" value="" type="hidden">
+                                  </div>
+                                    <input required type="text" name="title" class="form-control" placeholder="Enter the title of you article">
+                                    <textarea required name="excerpt" class="form-control" placeholder="Enter an excerpt for your article"></textarea>
+                                    <input required accept="image/*" type="file" name="file" id="photo" onchange="uploadImage()" class="form-control" >
+                                    <textarea required rows="8" name="content" placeholder="Enter Content Here..." class="form-control"></textarea>
+                                    <button type="submit" class="btn btn-primary">Create</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- end page-wrapper -->
+            </div><!-- end col -->
+
+            <!-- end col -->
+        </div><!-- end row -->
+    </div><!-- end container -->
+</section>
+
+<script src="js/jquery.min.js"></script>
+    <script src="js/tether.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/custom.js"></script>
+
+
+    <!-- FIREBASE STUFF -->
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.22.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.22.0/firebase-storage.js"></script>
+
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.22.0/firebase-analytics.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+
+  // var formData = new FormData();
+ 
+
+
+  var firebaseConfig = {
+    apiKey: "AIzaSyBtApLHl7onojqAp3lijj32RP_SdpjIhTw",
+    authDomain: "propaganda-6710c.firebaseapp.com",
+    databaseURL: "https://propaganda-6710c.firebaseio.com",
+    projectId: "propaganda-6710c",
+    storageBucket: "propaganda-6710c.appspot.com",
+    messagingSenderId: "951244241838",
+    appId: "1:951244241838:web:afd5ee9b2fee4d1821263f",
+    measurementId: "G-G4Q9YGL019"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  console.log("Firebase Started");
+
+  function uploadImage() {
+    
+    console.log("Firebase Upload Function")
+    const ref = firebase.storage().ref();
+    const file = document.querySelector("#photo").files[0];
+    const name = new Date() + '-' + file.name;
+    const metadata = {
+      contentType: file.type
+    }
+
+    const task = ref.child(name).put(file, metadata);
+    task.then(snapshot => snapshot.ref.getDownloadURL())
+      .then(url => {
+        console.log(url)
+        alert("Image Uploaded Successfully")
+        //const image = document.querySelector('#image')
+        //image.src = url;
+        const op = document.querySelector("#urltosend")
+        op.value = url
+        //elem.setAttribute("hidden", true);
+        //isLoading = false;
+      })
+  }
+  firebase.analytics();
+
+  /*
+  $(document).ready(function () {
+    const elem = document.querySelector('#hide');
+    
+  })
+
+  (function(){
+    $("#photo").click(function(){
+        $("#hide").show()
+    })
+  })
+*/
+</script>
+</body>
+

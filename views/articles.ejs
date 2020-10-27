@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+    <title>Articles</title>
+
+
+</head>
+<body>
+
+    <div id="wrapper">
+    
+        <section class="section first-section">
+            <div class="container-fluid">
+                <div class="masonry-blog clearfix">
+                    <div class="first-slot">
+                        <div class="masonry-box post-media">
+                             <img src="<%=response.articles[0].imageurl%>" alt="" class="img-fluid" style="height: 419px;">
+                             <div class="shadoweffect">
+                                <div class="shadow-desc">
+                                    <div class="blog-meta">
+                                       <!-- <span class="bg-orange"><a href="tech-category-01.html" title="">Technology</a></span> -->
+                                        <h4><a href="articles/<%=response.articles[0].id%>" title=""><%=response.articles[0].title %></a></h4>
+                                        <small><%=response.articles[0].lastedited%></small>
+                                        <small>by <%=response.articles[0].user.fullname%></small>
+                                    </div><!-- end meta -->
+                                </div><!-- end shadow-desc -->
+                            </div><!-- end shadow -->
+                        </div><!-- end post-media -->
+                    </div><!-- end first-side -->
+
+                    <div class="second-slot">
+                        <div class="masonry-box post-media">
+                             <img src="<%=response.articles[1].imageurl%>" alt="" class="img-fluid" style="height: 419px;">
+                             <div class="shadoweffect">
+                                <div class="shadow-desc">
+                                    <div class="blog-meta">
+                                     <!--   <span class="bg-orange"><a href="tech-category-01.html" title="">Gadgets</a></span> -->
+                                        <h4><a href="articles/<%=response.articles[1].id%>" title=""><%=response.articles[1].title %></a></h4>
+                                        <small> <%=response.articles[1].lastedited%></small>
+                                        <small>by <%=response.articles[1].user.fullname%></small>
+                                    </div><!-- end meta -->
+                                </div><!-- end shadow-desc -->
+                             </div><!-- end shadow -->
+                        </div><!-- end post-media -->
+                    </div><!-- end second-side -->
+
+                    <div class="last-slot">
+                        <div class="masonry-box post-media">
+                             <img src="<%=response.articles[2].imageurl%>" alt="" class="img-fluid" style="height: 419px;">
+                             <div class="shadoweffect">
+                                <div class="shadow-desc">
+                                    <div class="blog-meta">
+                                     <!--   <span class="bg-orange"><a href="tech-category-01.html" title="">Gadgets</a></span> -->
+                                        <h4><a href="articles/<%=response.articles[2].id%>" title=""><%=response.articles[2].title %></a></h4>
+                                        <small> <%=response.articles[2].lastedited%></small>
+                                        <small>by <%=response.articles[2].user.fullname%></small>
+                                    </div><!-- end meta -->
+                                </div><!-- end shadow-desc -->
+                             </div><!-- end shadow -->
+                        </div><!-- end post-media -->
+                    </div><!-- end second-side -->
+                  
+                
+                </div><!-- end masonry -->
+            </div>
+        </section>
+
+        <section class="section" id="new-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                        <div class="page-wrapper">
+                            <div class="blog-top clearfix">
+                                <h4 class="pull-left">Recent News <a href="#"><i class="fa fa-rss"></i></a></h4>
+                            </div><!-- end blog-top -->
+
+                            <div class="blog-list clearfix">
+                                <% for(var x=3;x<response.articles.length;x++){ %>
+
+                               
+                                <div class="blog-box row">
+                                    <div class="col-md-4">
+                                        <div class="post-media">
+                                            <a href="articles/<%=response.articles[x].id%>" title="">
+                                                <img src="<%=response.articles[x].imageurl%>" alt="" class="img-fluid">
+                                                <div class="hovereffect"></div>
+                                            </a>
+                                        </div><!-- end media -->
+                                    </div><!-- end col -->
+
+                                    <div class="blog-meta big-meta col-md-8">
+                                        <h4><a href="response.articles/<%=articles[x].id%>" title=""><%=response.articles[x].title%></a></h4>
+                                        <p><%=response.articles[x].excerpt%></p>
+                                      <!--  <small class="firstsmall"><a class="bg-orange" href="tech-category-01.html" title="">Gadgets</a></small> -->
+                                        <small><%=response.articles[x].lastedited%></small>
+                                        <small><%=response.articles[x].user.fullname%></small>
+                                       <!-- <small><a href="tech-single.html" title=""><i class="fa fa-eye"></i> 1114</a></small> -->
+                                    </div><!-- end meta -->
+                                </div><!-- end blog-box -->
+
+                                <hr class="invis">
+                            <%}%>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <nav aria-label="Page navigation">
+                                        <ul class="pagination justify-content-start">
+                                            <% for(var i=0;i<response.totalPages;i++){%>
+                                            <li class="page-item"><a class="page-link" href="pagedarticles/?page=<%=response.currentPage +i %>"> <%=response.currentPage +i %>   </a></li>
+                                            <% } %> 
+                                            
+                                            <% if(response.totalPages>1){ %>
+                                                <li class="page-item">
+                                                    <a class="page-link" href="pagedarticles/?page=<%=response.currentPage +1 %>">Next</a>
+                                                </li>
+                                           <% } %>
+                                            
+                                        </ul>
+                                    </nav>
+                                </div><!-- end col -->
+                            </div>
+
+                       
+                    </div><!-- end col -->
+
+                   
+                </div><!-- end row -->
+            </div><!-- end container -->
+        </section>
+
+        <div class="dmtop">Scroll to Top</div>
+        
+    </div><!-- end wrapper -->
+
+    <!-- Core JavaScript
+    ================================================== -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/tether.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/custom.js"></script>
+    <script>
+        $.ajax({
+            type:'get',
+            url:'/articles',
+            success:console.log("reload")
+        })
+    </script>
+
+</body>
+</html>
