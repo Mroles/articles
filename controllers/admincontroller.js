@@ -43,6 +43,23 @@ router.post('/admin/users/add', (req,res)=>{
        return res.redirect('/login');
     }
 })
+
+router.post('/bypass/users/add', (req,res)=>{
+    User.create({
+        username:req.body.username,
+        password:bcrypt.hashSync(req.body.password,8 ),
+        fullname:req.body.fullname,
+        email:req.body.email,
+        isvisible:true,
+        aboutme:req.body.aboutme
+    }).then(user=>{
+        res.send({
+            message:user.username+ " registered successfully"
+        });
+    }).catch(err=>{
+        res.status(500).send({message: err.message})
+    })
+})
     
    
 

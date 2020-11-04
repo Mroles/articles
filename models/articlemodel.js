@@ -18,9 +18,6 @@ module.exports = (sequelize, Sequelize) => {
         excerpt:{
             type:Sequelize.TEXT
         },
-        top:{
-            type:Sequelize.BOOLEAN
-        }
     });
 
     return Article;

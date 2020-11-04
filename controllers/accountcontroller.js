@@ -54,9 +54,14 @@ router.get('/signup',(req,res)=>{
 });
 
 
-router.get('/logout', (req,res)=>{
-res.redirect('/login');
-req.session.destroy();
+//router.get('/logout', (req,res)=>{
+//res.redirect('/login');
+//req.session.destroy();
+//})
+
+router.post('/logout', (req,res)=>{
+    req.session.destroy();
+    return res.redirect('/login');
 })
 
 
